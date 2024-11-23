@@ -6,7 +6,7 @@ export const Item = ({ guitar, increaseQuantity, decreaseQuantity, removeFromCar
   return (
     <tr key={guitar.id}>
       <td>
-        <img className="img-fluid" src={`/img/${image}.jpg`} alt={`imagen de ${name}`} />
+        <img className="img-fluid" src={`./img/${image}.jpg`} alt={`imagen de ${name}`} />
       </td>
       <td>{name}</td>
       <td className="fw-bold">{price}</td>
