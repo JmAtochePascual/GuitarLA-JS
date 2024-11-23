@@ -1,13 +1,18 @@
 import Header from './components/Header'
 import Guitar from './components/Guitar'
 import { db } from './data/guitars'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const App = () => {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart') || '[]'));
   const MAX_QUANTITY = 5;
   const MIN_QUANTITY = 1;
   const INCREASE = 1;
+
+  // Save the cart in the local storage
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
 
   // Increase the quantity of a guitar in the cart
   const increaseQuantity = guitar => {
