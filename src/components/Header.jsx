@@ -1,6 +1,7 @@
 import React from 'react'
+import { Item } from './Item'
 
-const Header = () => {
+const Header = ({ cart, increaseQuantity, decreaseQuantity, removeFromCart }) => {
   return (
     <header className="py-5 header">
       <div className="container-xl">
@@ -27,35 +28,17 @@ const Header = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>
-                        <img className="img-fluid" src="/img/guitarra_02.jpg" alt="imagen guitarra" />
-                      </td>
-                      <td>SRV</td>
-                      <td className="fw-bold">
-                        $299
-                      </td>
-                      <td className="flex align-items-start gap-4">
-                        <button
-                          type="button"
-                          className="btn btn-dark">
-                          -
-                        </button>
-                        1
-                        <button
-                          type="button"
-                          className="btn btn-dark">
-                          +
-                        </button>
-                      </td>
-                      <td>
-                        <button
-                          className="btn btn-danger"
-                          type="button">
-                          X
-                        </button>
-                      </td>
-                    </tr>
+                    {
+                      cart.map(guitar =>
+                        <Item
+                          key={guitar.id}
+                          guitar={guitar}
+                          increaseQuantity={increaseQuantity}
+                          decreaseQuantity={decreaseQuantity}
+                          removeFromCart={removeFromCart}
+                        />
+                      )
+                    }
                   </tbody>
                 </table>
 

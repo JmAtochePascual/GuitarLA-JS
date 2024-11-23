@@ -7,22 +7,53 @@ const App = () => {
   const [cart, setCart] = useState([]);
 
   // Increase the quantity of a guitar in the cart
-  const increaseQuantity = id => cart.map(item => item.id === id ? { ...item, quantity: item.quantity + 1 } : item);
+  const increaseQuantity = guitar => {
+    if (guitar.quantity === 5) return;
+
+    const newCart = cart.map(item => item.id === guitar.id ? { ...item, quantity: item.quantity + 1 } : item);
+    setCart(newCart);
+  }
+
+  // Decrease the quantity of a guitar in the cart
+  const decreaseQuantity = guitar => {
+    if (guitar.quantity === 1) {
+      removeFromCart(guitar);
+      return;
+    }
+
+    const newCart = cart.map(item => item.id === guitar.id ? { ...item, quantity: item.quantity - 1 } : item);
+    setCart(newCart);
+  }
+
+  // Remove a guitar from the cart
+  const removeFromCart = guitar => {
+    const newCart = cart.filter(item => item.id !== guitar.id);
+    setCart(newCart);
+  }
+
+  // Add a guitar to the cart
+  const addToCart = guitar => {
+    setCart([...cart, { ...guitar, quantity: 1 }]);
+  }
 
   // Add a guitar to the cart or increase its quantity
-  const addToCart = guitar => {
-
+  const handleCart = guitar => {
     // Check if the guitar is already in the cart
     const alreadyInCart = cart.some(item => item.id === guitar.id);
 
     alreadyInCart
-      ? setCart(increaseQuantity(guitar.id))
-      : setCart([...cart, { ...guitar, quantity: 1 }]);
+      ? increaseQuantity(guitar)
+      : addToCart(guitar);
   }
 
   return (
     <>
-      <Header />
+      <Header
+        cart={cart}
+        increaseQuantity={increaseQuantity}
+        decreaseQuantity={decreaseQuantity}
+        removeFromCart={removeFromCart}
+      />
 
       <main className="container-xl mt-5">
         <h2 className="text-center">Nuestra Colección</h2>
@@ -33,7 +64,7 @@ const App = () => {
               <Guitar
                 key={guitar.id}
                 guitar={guitar}
-                addToCart={addToCart}
+                handleCart={handleCart}
               />
             )
           }

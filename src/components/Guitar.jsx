@@ -1,5 +1,5 @@
 
-const Guitar = ({ guitar, addToCart }) => {
+const Guitar = ({ guitar, handleCart }) => {
   const { name, description, price, image } = guitar;
 
   return (
@@ -13,7 +13,7 @@ const Guitar = ({ guitar, addToCart }) => {
         <p className="fw-black text-primary fs-3">${price}</p>
         <button
           type="button"
-          onClick={() => addToCart(guitar)}
+          onClick={() => handleCart(guitar)}
           className="btn btn-dark w-100" >
           Agregar al Carrito
         </button>
