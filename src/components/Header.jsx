@@ -3,6 +3,7 @@ import { Item } from './Item'
 
 const Header = ({ cart, increaseQuantity, decreaseQuantity, removeFromCart }) => {
   const isCartEmpty = cart.length === 0;
+  const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   return (
     <header className="py-5 header">
@@ -48,7 +49,7 @@ const Header = ({ cart, increaseQuantity, decreaseQuantity, removeFromCart }) =>
                         </tbody>
                       </table>
 
-                      <p className="text-end">Total pagar: <span className="fw-bold">$899</span></p>
+                      <p className="text-end">Total pagar: <span className="fw-bold">${total}</span></p>
                       <button className="btn btn-dark w-100 mt-3 p-2">Vaciar Carrito</button>
                     </>
                 }
