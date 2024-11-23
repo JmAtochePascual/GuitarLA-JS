@@ -2,6 +2,8 @@ import React from 'react'
 import { Item } from './Item'
 
 const Header = ({ cart, increaseQuantity, decreaseQuantity, removeFromCart }) => {
+  const isCartEmpty = cart.length === 0;
+
   return (
     <header className="py-5 header">
       <div className="container-xl">
@@ -16,34 +18,40 @@ const Header = ({ cart, increaseQuantity, decreaseQuantity, removeFromCart }) =>
               <img className="img-fluid" src="/img/carrito.png" alt="imagen carrito" />
 
               <div id="carrito" className="bg-white p-3">
-                <p className="text-center">El carrito esta vacio</p>
-                <table className="w-100 table">
-                  <thead>
-                    <tr>
-                      <th>Imagen</th>
-                      <th>Nombre</th>
-                      <th>Precio</th>
-                      <th>Cantidad</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {
-                      cart.map(guitar =>
-                        <Item
-                          key={guitar.id}
-                          guitar={guitar}
-                          increaseQuantity={increaseQuantity}
-                          decreaseQuantity={decreaseQuantity}
-                          removeFromCart={removeFromCart}
-                        />
-                      )
-                    }
-                  </tbody>
-                </table>
+                {
+                  isCartEmpty
+                    ? <p className="text-center">El carrito esta vacio</p>
+                    :
+                    <>
+                      <table className="w-100 table">
+                        <thead>
+                          <tr>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {
+                            cart.map(guitar =>
+                              <Item
+                                key={guitar.id}
+                                guitar={guitar}
+                                increaseQuantity={increaseQuantity}
+                                decreaseQuantity={decreaseQuantity}
+                                removeFromCart={removeFromCart}
+                              />
+                            )
+                          }
+                        </tbody>
+                      </table>
 
-                <p className="text-end">Total pagar: <span className="fw-bold">$899</span></p>
-                <button className="btn btn-dark w-100 mt-3 p-2">Vaciar Carrito</button>
+                      <p className="text-end">Total pagar: <span className="fw-bold">$899</span></p>
+                      <button className="btn btn-dark w-100 mt-3 p-2">Vaciar Carrito</button>
+                    </>
+                }
               </div>
             </div>
           </nav>
