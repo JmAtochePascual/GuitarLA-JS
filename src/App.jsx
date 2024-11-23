@@ -5,23 +5,26 @@ import { useState } from 'react';
 
 const App = () => {
   const [cart, setCart] = useState([]);
+  const MAX_QUANTITY = 5;
+  const MIN_QUANTITY = 1;
+  const INCREASE = 1;
 
   // Increase the quantity of a guitar in the cart
   const increaseQuantity = guitar => {
-    if (guitar.quantity === 5) return;
+    if (guitar.quantity === MAX_QUANTITY) return;
 
-    const newCart = cart.map(item => item.id === guitar.id ? { ...item, quantity: item.quantity + 1 } : item);
+    const newCart = cart.map(item => item.id === guitar.id ? { ...item, quantity: item.quantity + INCREASE } : item);
     setCart(newCart);
   }
 
   // Decrease the quantity of a guitar in the cart
   const decreaseQuantity = guitar => {
-    if (guitar.quantity === 1) {
+    if (guitar.quantity === MIN_QUANTITY) {
       removeFromCart(guitar);
       return;
     }
 
-    const newCart = cart.map(item => item.id === guitar.id ? { ...item, quantity: item.quantity - 1 } : item);
+    const newCart = cart.map(item => item.id === guitar.id ? { ...item, quantity: item.quantity - INCREASE } : item);
     setCart(newCart);
   }
 
@@ -33,8 +36,11 @@ const App = () => {
 
   // Add a guitar to the cart
   const addToCart = guitar => {
-    setCart([...cart, { ...guitar, quantity: 1 }]);
+    setCart([...cart, { ...guitar, quantity: INCREASE }]);
   }
+
+  // Reset the cart
+  const resetCart = () => setCart([]);
 
   // Add a guitar to the cart or increase its quantity
   const handleCart = guitar => {
@@ -53,6 +59,7 @@ const App = () => {
         increaseQuantity={increaseQuantity}
         decreaseQuantity={decreaseQuantity}
         removeFromCart={removeFromCart}
+        resetCart={resetCart}
       />
 
       <main className="container-xl mt-5">

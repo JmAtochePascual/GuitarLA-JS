@@ -1,7 +1,7 @@
 import React from 'react'
 import { Item } from './Item'
 
-const Header = ({ cart, increaseQuantity, decreaseQuantity, removeFromCart }) => {
+const Header = ({ cart, increaseQuantity, decreaseQuantity, removeFromCart, resetCart }) => {
   const isCartEmpty = cart.length === 0;
   const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
@@ -50,7 +50,11 @@ const Header = ({ cart, increaseQuantity, decreaseQuantity, removeFromCart }) =>
                       </table>
 
                       <p className="text-end">Total pagar: <span className="fw-bold">${total}</span></p>
-                      <button className="btn btn-dark w-100 mt-3 p-2">Vaciar Carrito</button>
+                      <button
+                        onClick={resetCart}
+                        className="btn btn-dark w-100 mt-3 p-2">
+                        Vaciar Carrito
+                      </button>
                     </>
                 }
               </div>
