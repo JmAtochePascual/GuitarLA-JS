@@ -41,7 +41,7 @@ const App = () => {
       </footer>
 
       <ToastContainer
-        position="bottom-center"
+        position="top-right"
         autoClose={3000}
         hideProgressBar={false}
         closeOnClick

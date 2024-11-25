@@ -14,7 +14,7 @@ const useCart = () => {
 
   // Increase the quantity of a guitar in the cart
   const increaseQuantity = guitar => {
-    if (guitar.quantity === MAX_QUANTITY) return;
+    if (cart.find(item => item.id === guitar.id).quantity >= MAX_QUANTITY) return;
 
     const newCart = cart.map(item => item.id === guitar.id ? { ...item, quantity: item.quantity + INCREASE } : item);
     setCart(newCart);
@@ -24,7 +24,7 @@ const useCart = () => {
 
   // Decrease the quantity of a guitar in the cart
   const decreaseQuantity = guitar => {
-    if (guitar.quantity === MIN_QUANTITY) {
+    if (guitar.quantity <= MIN_QUANTITY) {
       removeFromCart(guitar);
       return;
     }
