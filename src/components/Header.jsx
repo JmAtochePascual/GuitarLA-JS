@@ -1,5 +1,5 @@
-import React from 'react'
-import { Item } from './Item'
+/* eslint-disable react/prop-types */
+import Item from './Item';
 
 const Header = ({ cart, increaseQuantity, decreaseQuantity, removeFromCart, resetCart }) => {
   const isCartEmpty = cart.length === 0;
