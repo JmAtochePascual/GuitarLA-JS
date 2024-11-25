@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 const useCart = () => {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart') || '[]'));
@@ -17,6 +18,8 @@ const useCart = () => {
 
     const newCart = cart.map(item => item.id === guitar.id ? { ...item, quantity: item.quantity + INCREASE } : item);
     setCart(newCart);
+
+    toast.success('Cantidad aumentada');
   }
 
   // Decrease the quantity of a guitar in the cart
@@ -28,17 +31,23 @@ const useCart = () => {
 
     const newCart = cart.map(item => item.id === guitar.id ? { ...item, quantity: item.quantity - INCREASE } : item);
     setCart(newCart);
+
+    toast.warning('Cantidad reducida');
   }
 
   // Remove a guitar from the cart
   const removeFromCart = guitar => {
     const newCart = cart.filter(item => item.id !== guitar.id);
     setCart(newCart);
+
+    toast.error('Guitarra eliminada del carrito');
   }
 
   // Add a guitar to the cart
   const addToCart = guitar => {
     setCart([...cart, { ...guitar, quantity: INCREASE }]);
+
+    toast.success('Guitarra agregada al carrito');
   }
 
   // Reset the cart

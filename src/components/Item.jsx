@@ -1,6 +1,6 @@
-import React from 'react'
+/* eslint-disable react/prop-types */
 
-export const Item = ({ guitar, increaseQuantity, decreaseQuantity, removeFromCart }) => {
+const Item = ({ guitar, increaseQuantity, decreaseQuantity, removeFromCart }) => {
   const { name, price, image, quantity } = guitar;
 
   return (
@@ -36,3 +36,5 @@ export const Item = ({ guitar, increaseQuantity, decreaseQuantity, removeFromCar
     </tr>
   )
 }
+
+export default Item;

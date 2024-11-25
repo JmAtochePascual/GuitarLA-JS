@@ -2,6 +2,9 @@ import Header from './components/Header'
 import Guitar from './components/Guitar'
 import { db } from './data/guitars'
 import useCart from './hooks/useCart'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const App = () => {
   const { cart, increaseQuantity, decreaseQuantity, removeFromCart, resetCart, handleCart } = useCart();
 
@@ -36,6 +39,13 @@ const App = () => {
           <p className="text-white text-center fs-4 mt-4 m-md-0">GuitarLA - Todos los derechos Reservados</p>
         </div>
       </footer>
+
+      <ToastContainer
+        position="bottom-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        closeOnClick
+      />
     </>
   )
 }
